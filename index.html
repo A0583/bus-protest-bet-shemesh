@@ -72,24 +72,29 @@
             font-size: 16px;
         }
         .btn {
-            background-color: #3498db;
+            background-color: #27ae60;
             color: white;
-            padding: 15px;
+            padding: 18px;
             font-size: 18px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             width: 100%;
             box-sizing: border-box;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             transition: background-color 0.3s;
             font-weight: bold;
+            box-shadow: 0 4px 6px rgba(39, 174, 96, 0.3);
         }
         .btn:hover {
-            background-color: #2980b9;
+            background-color: #219653;
         }
         .btn-secondary {
             background-color: #95a5a6;
+            padding: 12px;
+            font-size: 15px;
+            border-radius: 5px;
+            box-shadow: none;
         }
         .btn-secondary:hover {
             background-color: #7f8c8d;
@@ -109,7 +114,7 @@
     </div>
 
     <div class="privacy-note">
-        🔒 <strong>חשוב לדעת:</strong> המידע שאתם מזינים כאן אינו נשמר בשום מקום ובשום מאגר! הוא משמש אך ורק ליצירת המייל בדפדפן ובתוכנת הדואר האישית שלכם.
+        🔒 <strong>חשוב לדעת:</strong> המידע שאתם מזינים כאן אינו נשמר בשום מקום! הוא משמש אך ורק ליצירת המייל בדפדפן שלכם.
     </div>
     
     <div class="form-group">
@@ -132,8 +137,8 @@
         <input type="text" id="userPhone" placeholder="להתקשרות ממשרד התחבורה">
     </div>
 
-    <button class="btn" onclick="processEmail('open')">1. לחץ לפתיחת המייל ושליחה</button>
-    <button class="btn btn-secondary" onclick="processEmail('copy')">2. לחץ להעתקת הטקסט (אם המייל לא נפתח אוטומטית)</button>
+    <button class="btn" onclick="processEmail('open')">לחצו כאן לפתיחת המייל ושליחה אוטומטית</button>
+    <button class="btn btn-secondary" onclick="processEmail('copy')">רק אם הכפתור הירוק לא עבד: לחצו כאן להעתקת הטקסט</button>
 </div>
 
 <script>
@@ -208,12 +213,10 @@
             
             var textArea = document.createElement("textarea");
             textArea.value = fullTextToCopy;
-            
             textArea.style.position = "fixed";
             textArea.style.top = "0";
             textArea.style.left = "0";
             textArea.style.opacity = "0";
-            
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
@@ -221,14 +224,13 @@
             try {
                 var successful = document.execCommand('copy');
                 if (successful) {
-                    alert("הטקסט, כולל כתובת הנמען והנושא, הועתק בהצלחה! תוכלו להדביק אותו כעת בתיבת המייל שלכם (למשל ב-Gmail).");
+                    alert("הטקסט הועתק בהצלחה לזיכרון של המכשיר!\n\nמה עושים עכשיו?\n1. פתחו את אפליקציית המייל שלכם (למשל Gmail).\n2. לחצו על אימייל חדש.\n3. הדביקו את הטקסט.\n4. שלחו לכתובת: pniotcrm@mot.gov.il");
                 } else {
                     alert("אירעה שגיאה בהעתקה, אנא נסו שוב.");
                 }
             } catch (err) {
                 alert("אירעה שגיאה בהעתקה. המכשיר חוסם פעולה זו.");
             }
-
             document.body.removeChild(textArea);
         }
     }
