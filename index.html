@@ -111,6 +111,16 @@
             return null;
         }
 
+        // רשימת נושאים (Subjects) אקראיים
+        const subjects = [
+            "בקשה דחופה להפעלת תחבורה ציבורית ברחוב אילפא, בית שמש",
+            "דרישה למתן שירותי תחבורה ציבורית - רחוב אילפא (בית שמש)",
+            "תלונה: היעדר קווי אוטובוס וניתוק תחבורתי ברחוב אילפא",
+            "הפרת הנחיות משרד התחבורה - חוסר בשירות ברחוב אילפא, בית שמש",
+            "פניית תושבים: בקשה לסיור שטח והפעלת קו הזנה ברחוב אילפא"
+        ];
+
+        // רשימת גופי הודעה (Bodies) אקראיים
         const templates = [
             "לכבוד משרד התחבורה.\n\nאני מתגורר/ת ברחוב אילפא, בית שמש. בקצה הרחוב קיימת תשתית מוכנה לתחבורה ציבורית, כולל סובה תקנית לסיבוב ומיקום לתחנות. חרף זאת, המשרד מסרב לאשר כניסת קווים. מרחק ההליכה לתחנה הקרובה חורג מהתקן המוגדר ב'הנחיות לתכנון תחבורה ציבורית' שלכם (עמ' 51). אנו דורשים אישור לכניסת קווי הזנה פנימיים באופן מיידי.",
             
@@ -119,13 +129,19 @@
             "לכבוד הרשות הארצית לתחבורה ציבורית.\n\nאני פונה אליכם בדרישה להפעלת קו אוטובוס ברחוב אילפא (ללא מוצא) בבית שמש. בקצה הרחוב ישנה 'סובה' שאף יועדה בעבר לתחנות ולשילוט. מניעת השירות מאיתנו היא בגדר פיל לבן של תשתית שלא מנוצלת, ואפליה לעומת רחובות דומים בערים אחרות שמקבלים שירות. אבקש לאשר הפעלת מיניבוסים ברחוב, ולו רק בשעות השיא."
         ];
 
-        const randomIndex = Math.floor(Math.random() * templates.length);
+        // בחירת נושא ותוכן אקראיים
+        const randomSubjectIndex = Math.floor(Math.random() * subjects.length);
+        const randomTemplateIndex = Math.floor(Math.random() * templates.length);
+        
+        const selectedSubject = subjects[randomSubjectIndex];
+        const selectedTemplate = templates[randomTemplateIndex];
+
         const personalSignature = "\n\nבברכה,\n" + name + "\nת.ז: " + id + "\nכתובת: " + address + "\nטלפון: " + phone;
         
         return {
             email: "PublicTransportRequest@mot.gov.il",
-            subject: "בקשה דחופה להפעלת תחבורה ציבורית ברחוב אילפא, בית שמש",
-            body: templates[randomIndex] + personalSignature
+            subject: selectedSubject,
+            body: selectedTemplate + personalSignature
         };
     }
 
@@ -154,4 +170,4 @@
 </script>
 
 </body>
-</html>
+</html> 
