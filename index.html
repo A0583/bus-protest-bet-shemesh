@@ -9,7 +9,15 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background-color: #f4f4f9;
-            padding: 30px 15px;
+            padding: 10px 15px 30px 15px;
+            margin: 0;
+        }
+        .bsd {
+            text-align: right;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 10px;
+            padding-right: 10px;
         }
         .container {
             background-color: white;
@@ -26,6 +34,15 @@
             font-size: 16px;
             color: #555;
             margin-bottom: 20px;
+        }
+        .privacy-note {
+            font-size: 13px;
+            color: #27ae60;
+            background-color: #eafaf1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #c8e6c9;
         }
         .form-group {
             margin-bottom: 15px;
@@ -57,6 +74,7 @@
             box-sizing: border-box;
             margin-bottom: 10px;
             transition: background-color 0.3s;
+            font-weight: bold;
         }
         .btn:hover {
             background-color: #2980b9;
@@ -71,9 +89,15 @@
 </head>
 <body>
 
+<div class="bsd">בס"ד</div>
+
 <div class="container">
     <h1>דורשים תחבורה ציבורית ברחוב אילפא!</h1>
     <p>שכנים יקרים, אנא מלאו את פרטיכם כדי שהתלונה תהיה רשמית ותחייב מענה. המערכת תכין עבורכם נוסח מוכן ואקראי.</p>
+    
+    <div class="privacy-note">
+        🔒 <strong>חשוב לדעת:</strong> המידע שאתם מזינים כאן אינו נשמר בשום מקום ובשום מאגר! הוא משמש אך ורק ליצירת המייל בדפדפן ובתוכנת הדואר האישית שלכם.
+    </div>
     
     <div class="form-group">
         <label for="userName">שם מלא:</label>
@@ -111,7 +135,6 @@
             return null;
         }
 
-        // רשימת נושאים (Subjects) אקראיים
         const subjects = [
             "בקשה דחופה להפעלת תחבורה ציבורית ברחוב אילפא, בית שמש",
             "דרישה למתן שירותי תחבורה ציבורית - רחוב אילפא (בית שמש)",
@@ -120,54 +143,5 @@
             "פניית תושבים: בקשה לסיור שטח והפעלת קו הזנה ברחוב אילפא"
         ];
 
-        // רשימת גופי הודעה (Bodies) אקראיים
         const templates = [
-            "לכבוד משרד התחבורה.\n\nאני מתגורר/ת ברחוב אילפא, בית שמש. בקצה הרחוב קיימת תשתית מוכנה לתחבורה ציבורית, כולל סובה תקנית לסיבוב ומיקום לתחנות. חרף זאת, המשרד מסרב לאשר כניסת קווים. מרחק ההליכה לתחנה הקרובה חורג מהתקן המוגדר ב'הנחיות לתכנון תחבורה ציבורית' שלכם (עמ' 51). אנו דורשים אישור לכניסת קווי הזנה פנימיים באופן מיידי.",
-            
-            "לכבוד פניות הציבור, משרד התחבורה.\n\nברחוב אילפא בבית שמש ישנה תשתית מוכנה ומאושרת להסתובבות אוטובוסים, אך הרחוב מנותק מתחבורה. המצב הנוכחי מפר את הנחיות משרד התחבורה לגבי מרחקי הליכה סבירים לתחנה. הצעידה היומיומית לתחנה המרוחקת יחד עם הילדים, במיוחד בעליות של בית שמש, היא קשה מנשוא. נדרש סיור שטח של מתכנן המחוז כדי לתקן את המעוות.",
-            
-            "לכבוד הרשות הארצית לתחבורה ציבורית.\n\nאני פונה אליכם בדרישה להפעלת קו אוטובוס ברחוב אילפא (ללא מוצא) בבית שמש. בקצה הרחוב ישנה 'סובה' שאף יועדה בעבר לתחנות ולשילוט. מניעת השירות מאיתנו היא בגדר פיל לבן של תשתית שלא מנוצלת, ואפליה לעומת רחובות דומים בערים אחרות שמקבלים שירות. אבקש לאשר הפעלת מיניבוסים ברחוב, ולו רק בשעות השיא."
-        ];
-
-        // בחירת נושא ותוכן אקראיים
-        const randomSubjectIndex = Math.floor(Math.random() * subjects.length);
-        const randomTemplateIndex = Math.floor(Math.random() * templates.length);
-        
-        const selectedSubject = subjects[randomSubjectIndex];
-        const selectedTemplate = templates[randomTemplateIndex];
-
-        const personalSignature = "\n\nבברכה,\n" + name + "\nת.ז: " + id + "\nכתובת: " + address + "\nטלפון: " + phone;
-        
-        return {
-            email: "PublicTransportRequest@mot.gov.il",
-            subject: selectedSubject,
-            body: selectedTemplate + personalSignature
-        };
-    }
-
-    function processEmail(action) {
-        const content = generateContent();
-        if (!content) return; 
-
-        if (action === 'open') {
-            const mailtoLink = "mailto:" + content.email + 
-                               "?subject=" + encodeURIComponent(content.subject) + 
-                               "&body=" + encodeURIComponent(content.body);
-            window.location.href = mailtoLink;
-        } else if (action === 'copy') {
-            const fullTextToCopy = "נמען: " + content.email + "\n" +
-                                   "נושא: " + content.subject + "\n\n" + 
-                                   "--- גוף ההודעה להדבקה ---\n\n" + 
-                                   content.body;
-            
-            navigator.clipboard.writeText(fullTextToCopy).then(() => {
-                alert("הטקסט, כולל כתובת הנמען והנושא, הועתק בהצלחה! תוכלו להדביק אותו כעת בתיבת המייל שלכם (למשל ב-Gmail).");
-            }).catch(err => {
-                alert("אירעה שגיאה בהעתקה, אנא נסו שוב.");
-            });
-        }
-    }
-</script>
-
-</body>
-</html> 
+            "לכבוד משרד התחבורה.\n\nאני מתגורר/ת ברחוב אילפא, בית שמש. בקצה הרחוב קיימת תשתית מוכנה לתחבורה ציבורית, כולל סובה תקנית
