@@ -131,7 +131,7 @@
 
     function processEmail(action) {
         const content = generateContent();
-        if (!content) return; // עצירה אם חסרים פרטים
+        if (!content) return; 
 
         if (action === 'open') {
             const mailtoLink = "mailto:" + content.email + 
@@ -150,83 +150,6 @@
                 alert("אירעה שגיאה בהעתקה, אנא נסו שוב.");
             });
         }
-    }
-</script>
-
-</body>
-</html>        }
-        .btn:hover {
-            background-color: #2980b9;
-        }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>דורשים תחבורה ציבורית ברחוב אילפא!</h1>
-    <p>שכנים יקרים, אנא מלאו את פרטיכם כדי שהתלונה תהיה רשמית ותחייב מענה. המערכת תפתח את המייל שלכם עם נוסח מוכן ואקראי יחד עם הפרטים שהזנתם.</p>
-    
-    <div class="form-group">
-        <label for="userName">שם מלא:</label>
-        <input type="text" id="userName" placeholder="לדוגמה: ישראל ישראלי">
-    </div>
-    
-    <div class="form-group">
-        <label for="userId">תעודת זהות:</label>
-        <input type="text" id="userId" placeholder="הקלידו מספר ת.ז">
-    </div>
-    
-    <div class="form-group">
-        <label for="userAddress">כתובת מגורים:</label>
-        <input type="text" id="userAddress" placeholder="לדוגמה: אילפא 12, בית שמש">
-    </div>
-    
-    <div class="form-group">
-        <label for="userPhone">מספר טלפון:</label>
-        <input type="text" id="userPhone" placeholder="להתקשרות ממשרד התחבורה">
-    </div>
-
-    <button class="btn" onclick="sendRandomEmail()">הכן ושגר פנייה למשרד התחבורה</button>
-</div>
-
-<script>
-    function sendRandomEmail() {
-        // משיכת הנתונים שהשכן הזין
-        const name = document.getElementById('userName').value.trim();
-        const id = document.getElementById('userId').value.trim();
-        const address = document.getElementById('userAddress').value.trim();
-        const phone = document.getElementById('userPhone').value.trim();
-
-        // בדיקה שכל השדות מלאים
-        if (!name || !id || !address || !phone) {
-            alert("אנא מלאו את כל הפרטים האישיים כדי שנוכל לייצר עבורכם תלונה רשמית.");
-            return;
-        }
-
-        const emailAddress = "PublicTransportRequest@mot.gov.il";
-        const subject = "בקשה דחופה להפעלת תחבורה ציבורית ברחוב אילפא, בית שמש";
-
-        const templates = [
-            "לכבוד משרד התחבורה.\n\nאני מתגורר ברחוב אילפא, בית שמש. בקצה הרחוב קיימת תשתית מוכנה לתחבורה ציבורית, כולל סובה תקנית לסיבוב ומיקום לתחנות. חרף זאת, המשרד מסרב לאשר כניסת קווים. מרחק ההליכה לתחנה הקרובה חורג מהתקן המוגדר ב'הנחיות לתכנון תחבורה ציבורית' שלכם (עמ' 51). אנו דורשים אישור לכניסת קווי הזנה פנימיים באופן מיידי.",
-            
-            "לכבוד פניות הציבור, משרד התחבורה.\n\nברחוב אילפא בבית שמש ישנה תשתית מוכנה ומאושרת להסתובבות אוטובוסים, אך הרחוב מנותק מתחבורה. המצב הנוכחי מפר את הנחיות משרד התחבורה לגבי מרחקי הליכה סבירים לתחנה. הצעידה היומיומית לתחנה המרוחקת יחד עם הילדים, במיוחד בעליות של בית שמש, היא קשה מנשוא. נדרש סיור שטח של מתכנן המחוז כדי לתקן את המעוות.",
-            
-            "לכבוד הרשות הארצית לתחבורה ציבורית.\n\nאני פונה אליכם בדרישה להפעלת קו אוטובוס ברחוב אילפא (ללא מוצא) בבית שמש. בקצה הרחוב ישנה 'סובה' שאף יועדה בעבר לתחנות ולשילוט. מניעת השירות מאיתנו היא בגדר פיל לבן של תשתית שלא מנוצלת, ואפליה לעומת רחובות דומים בערים אחרות שמקבלים שירות. אבקש לאשר הפעלת מיניבוסים ברחוב, ולו רק בשעות השיא."
-        ];
-
-        const randomIndex = Math.floor(Math.random() * templates.length);
-        
-        // יצירת חתימה אישית עם הפרטים
-        const personalSignature = "\n\nבברכה,\n" + name + "\nת.ז: " + id + "\nכתובת: " + address + "\nטלפון: " + phone;
-        
-        // חיבור הנוסח עם החתימה
-        const finalBody = templates[randomIndex] + personalSignature;
-
-        const mailtoLink = "mailto:" + emailAddress + 
-                           "?subject=" + encodeURIComponent(subject) + 
-                           "&body=" + encodeURIComponent(finalBody);
-
-        window.location.href = mailtoLink;
     }
 </script>
 
